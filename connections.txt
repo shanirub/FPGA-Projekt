@@ -1,0 +1,27 @@
+# Eingabe binäre Zahl
+# Slide Switches SW0 - SW3
+NET "A(0)" LOC = "A10"; # SW0
+NET "A(1)" LOC = "D14"; # SW1
+NET "A(2)" LOC = "C14"; # SW2
+NET "A(3)" LOC = "P15"; # SW3
+
+# Eingabe Funktion Code
+# Slide Switches SW6 - SW7
+NET "A(4)" LOC = "T5";  # SW6
+NET "A(5)" LOC = "E4";  # SW7
+
+#	A(5)	A(4)
+#	0		0	BCD
+#	0		1	Aiken Code
+#	1		0	Gray
+#	1		1	Excess-3
+
+# Ausgabe 7-LED
+# LEDs --> 7 Segment Anzeige
+NET "SEG0A" LOC = "U18";	# LD0 - a
+NET "SEG0B" LOC = "M14";	# LD1 - b
+NET "SEG0C" LOC = "N14";	# LD2 - c
+NET "SEG0D" LOC = "L14";	# LD3 - d
+NET "SEG0E" LOC = "M13";	# LD4 - e
+NET "SEG0F" LOC = "D4";		# LD5 - f 
+NET "SEG0G" LOC = "P16";	# LD6 - g
