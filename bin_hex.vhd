@@ -31,8 +31,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity bin_system is
 	Port ( 	A : in  STD_LOGIC_VECTOR(5 downto 0); -- 6bit = 4 bit Nummer + 2 bit Funktion Auswahl
-			SEG0A, SEG0B, SEG0C, SEG0D, SEG0E, SEG0F, SEG0G : out  STD_LOGIC; -- 7 bit, Ausgabe in 7-Segment Anzeige als Leds
-		);
+			SEG0A, SEG0B, SEG0C, SEG0D, SEG0E, SEG0F, SEG0G : out  STD_LOGIC); -- 7 bit, Ausgabe in 7-Segment Anzeige als Leds
+		
 end bin_system;
 
 architecture Behavioral of bin_system is
