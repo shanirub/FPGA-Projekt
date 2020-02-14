@@ -8,7 +8,6 @@
 
 ### Ausgabe:
 - 7 bit von 7-Segment Anzeige.
-**(Diese 7 bits werden gezeigt als 7 Leds auf dem Board.)**
 
 ### Binärcode Systeme:
 00 / *BCD*    
