@@ -1,0 +1,20 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Fri Feb 14 11:41:46 2020
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "SEG0A" LOCATE = SITE "U16" LEVEL 1;
+COMP "SEG0B" LOCATE = SITE "U15" LEVEL 1;
+COMP "SEG0C" LOCATE = SITE "U13" LEVEL 1;
+COMP "SEG0D" LOCATE = SITE "M11" LEVEL 1;
+COMP "SEG0E" LOCATE = SITE "R11" LEVEL 1;
+COMP "SEG0F" LOCATE = SITE "T12" LEVEL 1;
+COMP "SEG0G" LOCATE = SITE "N10" LEVEL 1;
+COMP "A<0>" LOCATE = SITE "A10" LEVEL 1;
+COMP "A<1>" LOCATE = SITE "D14" LEVEL 1;
+COMP "A<2>" LOCATE = SITE "C14" LEVEL 1;
+COMP "A<3>" LOCATE = SITE "P15" LEVEL 1;
+COMP "A<4>" LOCATE = SITE "T5" LEVEL 1;
+COMP "A<5>" LOCATE = SITE "E4" LEVEL 1;
+SCHEMATIC END;
+

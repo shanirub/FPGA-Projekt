@@ -29,62 +29,91 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity bin_hex is
-	Port ( 	A0A1A2A3 : in  STD_LOGIC_VECTOR(3 downto 0);
-				A4A5A6A7 : in  STD_LOGIC_VECTOR(3 downto 0);
-				SEG0A, SEG0B, SEG0C, SEG0D, SEG0E, SEG0F, SEG0G : out  STD_LOGIC;
-				SEG1A, SEG1B, SEG1C, SEG1D, SEG1E, SEG1F, SEG1G : out  STD_LOGIC);
-end bin_hex;
 
-architecture Behavioral of bin_hex is
+
+
+entity bin_system is
+	Port ( 	A : in  STD_LOGIC_VECTOR(5 downto 0); -- 6bit = 4 bit Nummer + 2 bit Funktion Auswahl
+			SEG0A, SEG0B, SEG0C, SEG0D, SEG0E, SEG0F, SEG0G : out  STD_LOGIC); -- 7 bit, Ausgabe in 7-Segment Anzeige als Leds
+		
+end bin_system;
+
+architecture Behavioral of bin_system is
 
 signal OUTS0 : STD_LOGIC_VECTOR(6 downto 0);
-signal OUTS1 : STD_LOGIC_VECTOR(6 downto 0);
+
+
+-- 7-Segment Ziffern
+constant seg_wert_0 : std_logic_vector(6 downto 0) := "1111110";
+constant seg_wert_1 : std_logic_vector(6 downto 0) := "0110000";
+constant seg_wert_2 : std_logic_vector(6 downto 0) := "1101101";
+constant seg_wert_3 : std_logic_vector(6 downto 0) := "1111001";
+constant seg_wert_4 : std_logic_vector(6 downto 0) := "0110011";
+constant seg_wert_5 : std_logic_vector(6 downto 0) := "1011011";
+constant seg_wert_6 : std_logic_vector(6 downto 0) := "1011111";
+constant seg_wert_7 : std_logic_vector(6 downto 0) := "1110000";
+constant seg_wert_8 : std_logic_vector(6 downto 0) := "1111111";
+constant seg_wert_9 : std_logic_vector(6 downto 0) := "1111011";
+constant seg_wert_error : std_logic_vector(6 downto 0) := "1000111";
+
+-- 2-Segment Binary System
+constant bcd : std_logic_vector(1 downto 0) := "00";
+constant aiken : std_logic_vector(1 downto 0) := "01";
+constant gray : std_logic_vector(1 downto 0) := "10";
+constant excess_3 : std_logic_vector(1 downto 0) := "11";
 
 begin
-  with A0A1A2A3 select
-			-- "abcdefg"  Balkenbezeichnung 7-Segment
-  	OUTS0 <= "1111110" when "0000",
-				"0110000" when "0001",
-				"1101101" when "0010",
-				"1111001" when "0011",
-				"0110011" when "0100",
-				"1011011" when "0101",
-				"1011111" when "0110",
-				"1110000" when "0111",
-				"1111111" when "1000",
-				"1111011" when "1001",
-				"1110111" when "1010",
-				"0011111" when "1011",
-				"1001110" when "1100",
-				"0111101" when "1101",
-				"1001111" when "1110",
-				"1000111" when others;	-- the "others" clause is used in place
-												-- of "1111" for reasons explained later
+  with A select -- 4bit code + 2bit funktion
+  		OUTS0 <=	seg_wert_0 when bcd & "0000",
+				seg_wert_1 when bcd & "0001",
+				seg_wert_2 when bcd & "0010",
+				seg_wert_3 when bcd & "0011",
+				seg_wert_4 when bcd & "0100",
+				seg_wert_5 when bcd & "0101",
+				seg_wert_6 when bcd & "0110",
+				seg_wert_7 when bcd & "0111",
+				seg_wert_8 when bcd & "1000",
+				seg_wert_9 when bcd & "1001",
+	
+				seg_wert_0 when aiken & "0000",
+				seg_wert_1 when aiken & "0001",
+				seg_wert_2 when aiken & "0010",
+				seg_wert_3 when aiken & "0011",
+				seg_wert_4 when aiken & "0100",
+				seg_wert_5 when aiken & "1011",
+				seg_wert_6 when aiken & "1100",
+				seg_wert_7 when aiken & "1101",
+				seg_wert_8 when aiken & "1110",
+				seg_wert_9 when aiken & "1111",
+	
+				seg_wert_0 when excess_3 & "0011",
+				seg_wert_1 when excess_3 & "0100",
+				seg_wert_2 when excess_3 & "0101",
+				seg_wert_3 when excess_3 & "0110",
+				seg_wert_4 when excess_3 & "0111",
+				seg_wert_5 when excess_3 & "1000",
+				seg_wert_6 when excess_3 & "1001",
+				seg_wert_7 when excess_3 & "1010",
+				seg_wert_8 when excess_3 & "1011",
+				seg_wert_9 when excess_3 & "1100",
+	
+				seg_wert_0 when gray & "0000",
+				seg_wert_1 when gray & "0001",
+				seg_wert_2 when gray & "0011",
+				seg_wert_3 when gray & "0010",
+				seg_wert_4 when gray & "0110",
+				seg_wert_5 when gray & "0111",
+				seg_wert_6 when gray & "0101",
+				seg_wert_7 when gray & "0100",
+				seg_wert_8 when gray & "1100",
+				seg_wert_9 when gray & "1101",
+
+			
+				seg_wert_error when others;	-- the "others" clause: shows an error
+				
   SEG0A <= OUTS0(6); SEG0B <= OUTS0(5); SEG0C <= OUTS0(4); SEG0D <= OUTS0(3);
   SEG0E <= OUTS0(2); SEG0F <= OUTS0(1); SEG0G <= OUTS0(0);  
 
-  with A4A5A6A7 select
-			-- "abcdefg"  Balkenbezeichnung 7-Segment
-  	OUTS1 <= "1111110" when "0000",
-				"0110000" when "0001",
-				"1101101" when "0010",
-				"1111001" when "0011",
-				"0110011" when "0100",
-				"1011011" when "0101",
-				"1011111" when "0110",
-				"1110000" when "0111",
-				"1111111" when "1000",
-				"1111011" when "1001",
-				"1110111" when "1010",
-				"0011111" when "1011",
-				"1001110" when "1100",
-				"0111101" when "1101",
-				"1001111" when "1110",
-				"1000111" when others;	-- the "others" clause is used in place
-												-- of "1111" for reasons explained later
-  SEG1A <= OUTS1(6); SEG1B <= OUTS1(5); SEG1C <= OUTS1(4); SEG1D <= OUTS1(3);
-  SEG1E <= OUTS1(2); SEG1F <= OUTS1(1); SEG1G <= OUTS1(0);
+
 
 end Behavioral;
-
