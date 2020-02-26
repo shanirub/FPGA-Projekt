@@ -1,0 +1,26 @@
+# Eingabe binäre Zahl
+# Slide Switches SW0 - SW3
+NET "A(0)" LOC = "A10"; # SW0
+NET "A(1)" LOC = "D14"; # SW1
+NET "A(2)" LOC = "C14"; # SW2
+NET "A(3)" LOC = "P15"; # SW3
+
+# Eingabe Funktion Code
+# Slide Switches SW6 - SW7
+NET "A(4)" LOC = "T5";  # SW6
+NET "A(5)" LOC = "E4";  # SW7
+
+#	A(5)	A(4)
+#	0		0	BCD
+#	0		1	Aiken Code
+#	1		0	Gray
+#	1		1	Excess-3
+
+# Ausgabe VmodBB mit 7-Segment
+NET "SEG0A" LOC = "U16"; # Ziffer 0 a
+NET "SEG0B" LOC = "U15"; # Ziffer 0 b
+NET "SEG0C" LOC = "U13"; # Ziffer 0 c
+NET "SEG0D" LOC = "M11"; # Ziffer 0 d
+NET "SEG0E" LOC = "R11"; # Ziffer 0 e
+NET "SEG0F" LOC = "T12"; # Ziffer 0 f
+NET "SEG0G" LOC = "N10"; # Ziffer 0 g
